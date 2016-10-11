@@ -124,6 +124,7 @@ namespace NetworkRouting
         private List<PointF> points = new List<PointF>();
         private Graphics graphics;
         private List<HashSet<int>> adjacencyList;
+        private NetworkSolver networkSolver = new NetworkSolver();
 
         // Use this to generate paths (from start) to every node; then, just return the path of interest from start node to end node
         private void solveButton_Click(object sender, EventArgs e)
@@ -162,8 +163,34 @@ namespace NetworkRouting
 
         private void solveButton_Clicked()
         {
+            networkSolver.solve(points, adjacencyList, startNodeIndex, stopNodeIndex, arrayCheckBox.Checked);
+            printPath(networkSolver.Prev, startNodeIndex, stopNodeIndex);
+            heapTimeBox.Text = networkSolver.HeapTime.ToString();
+            if(arrayCheckBox.Checked) {
+                arrayTimeBox.Text = networkSolver.ArrayTime.ToString();
+                differenceBox.Text = (networkSolver.ArrayTime / networkSolver.HeapTime).ToString();
+            }
+            pathCostBox.Text = networkSolver.Dist[stopNodeIndex].ToString();
+            
             // *** Implement this method, use the variables "startNodeIndex" and "stopNodeIndex" as the indices for your start and stop points, respectively ***
         }
+
+        private void printPath(List<int> prev, int startNode, int stopNode) {
+            Pen pen = new Pen(Color.Black);
+            Font font = new Font(new FontFamily("Arial"), 16, FontStyle.Regular);
+            Brush brush = new SolidBrush(Color.Black);
+            int currNode = stopNode;
+            while (prev[currNode] != -1) {
+                graphics.DrawLine(pen, points[currNode], points[prev[currNode]]);
+                int length = (int)networkSolver.length(currNode, prev[currNode]);
+                graphics.DrawString(length.ToString(), font, brush, midPoint(points[currNode], points[prev[currNode]]));
+                currNode = prev[currNode];
+            }
+        }
+
+        private PointF midPoint(PointF p1, PointF p2) {
+            return new PointF((p1.X + p2.X) / 2, (p1.Y + p2.Y) / 2);
+        } 
 
         private Boolean startStopToggle = true;
         private int startNodeIndex = -1;

@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NetworkRouting.exe" size="17408">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NetworkRouting.exe" size="20480">
       <assemblyIdentity name="NetworkRouting" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>KMp5tCKnetDqRwM4xuHIpv07I/k=</dsig:DigestValue>
+        <dsig:DigestValue>7/aMuQeL7I1Cb6BOb+LdR7Xpllk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
